@@ -1,45 +1,37 @@
-package projectApi.api.medico;
+package projectApi.api.paciente;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import projectApi.api.endereco.DadosEndereco;
 import projectApi.api.endereco.Endereco;
-
-@Table(name = "medicos")
-@Entity(name = "Medico")
+@Table(name = "pacientes")
+@Entity(name = "Paciente")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Medico {
-
+public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
     private String telefone;
-    private String crm;
-
-    @Enumerated(EnumType.STRING)
-    private EspecialidadeEnum especialidade;
-
+    private String cpf;
     @Embedded
     private Endereco endereco;
 
-    public Medico(DadosCadastroMedicos dadosMedicos) {
-            this.nome = dadosMedicos.nome();
-            this.email = dadosMedicos.email();
-            this.telefone = dadosMedicos.telefone();
-            this.crm = dadosMedicos.crm();
-            this.especialidade = dadosMedicos.especialidade();
-            this.endereco = new Endereco(dadosMedicos.endereco());
+    public Paciente(DadosCadastroPacientes dadosCadastroPacientes){
+        this.nome = dadosCadastroPacientes.nome();
+        this.email = dadosCadastroPacientes.email();
+        this.telefone = dadosCadastroPacientes.telefone();
+        this.cpf = dadosCadastroPacientes.cpf();
+        this.endereco = new Endereco(dadosCadastroPacientes.endereco());
     }
 
-    public void atualizarInformacoes(DadosAtualizacaoMedicos dados) {
+    public void atualizarInformacao(DadosAtualizacaoPacientes dados) {
         if(dados.nome() != null){
             this.nome = dados.nome();
         }
