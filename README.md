@@ -1,4 +1,3 @@
-DTO = data transfer object
 
 record is used to create an immutable class
 example old way to create an immutable class:
